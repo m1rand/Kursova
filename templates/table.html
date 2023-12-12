@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Database - {{ table_name }} Data</title>
+    
+    <style>
+        body {
+            background-color: #eafae1;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #008000;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #008000;
+        }
+
+        th {
+            background-color: #008000;
+            color: white;
+        }
+
+        .not-found-container {
+            margin-top: 20px;
+        }
+
+        .not-found-message {
+            color: #FF0000;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .back-button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #008000;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ table_name }}</h1>
+
+    {% if data %}
+        <table border="1">
+            <tr>
+                {% for column in columns %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in data %}
+                <tr>
+                    {% for value in row %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="not-found-container">
+            <p class="not-found-message">Такого клієнта немає</p>
+        </div>
+    {% endif %}
+</body>
+</html>

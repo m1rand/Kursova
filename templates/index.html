@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Database</title>
+    
+    <style>
+        body {
+            background-color: #eafae1;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #008000;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .not-found-message {
+            color: #FF0000;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Вибір таблиці</h1>
+    <form action="/table" method="post">
+        <select name="table">
+            {% for table in table_names %}
+                <option value="{{ table }}">{{ table }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" style="background-color: #008000; color: white;">Показати таблицю</button>
+
+        <button type="button" onclick="showClientByIdForm()" style="background-color: #008000; color: white;">Клієнт по ID</button>
+    </form>
+
+    <div id="clientByIdForm" style="display: none; margin-top: 20px;">
+        <form action="/client" method="post">
+            <label for="clientId">ID клієнта:</label>
+            <input type="text" name="clientId" id="clientId" required>
+            <button type="submit" style="background-color: #008000; color: white;">Пошук</button>
+        </form>
+
+        {% if client_not_found %}
+            <p class="not-found-message">Клієнта з таким ID немає</p>
+        {% endif %}
+    </div>
+
+    <script>
+        function showClientByIdForm() {
+            document.getElementById('clientByIdForm').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
+
